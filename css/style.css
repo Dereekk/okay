@@ -1,0 +1,69 @@
+@keyframes Square {
+    from {background-color: white;}
+    to {background-color: black;}
+}
+@keyframes Square-text {
+    0% {background-color: red}
+    50% {background-color: green}
+    100% {background-color: blue}
+}
+#Main-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+    /*animation: Square 5s linear 2s infinite alternate;*/
+}
+
+#text {
+    position:relative;
+    height: 50%;
+    width: 50%;
+    margin: auto;
+    top: 25%;
+    animation: Square-text 5s linear 0s infinite alternate;
+    resize: both;
+    overflow: auto;
+    min-width: 50px; /*suggest a min-width & min-height*/
+    min-height: 50px;
+}
+
+#nav-top {
+    position: fixed;
+    top: 0;
+    height: 5%;
+    width: 100%;
+    background-color: aquamarine;
+    z-index: 5;
+    margin: auto;
+    left: 0;
+    
+}
+#Home {
+    list-style: none;
+}
+#nav {
+    position: absolute;
+    top: 25%;
+    text-decoration: none;
+    text-decoration-color: wheat;
+    color: black;
+    outline: 2px solid #2B2B2B;
+    outline-offset: 3px;
+}
+#nav:hover {
+    color: white;
+    background: black;
+    margin: auto;
+    
+}
+.fullscreen-bg__video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
