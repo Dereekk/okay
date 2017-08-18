@@ -1,19 +1,36 @@
 {
-    "start_url": "/?homescreen=1",
+    "start_url": "index.html",
     "scope": "/",
     "display": "standalone",
     "name": "Okay",
     "short_name": "Okay",
     "background_color": "#2196F3",
     "theme_color": "#2196F3",
-    "icons": [{
-        "src": "media/iamge/portable/icon_192px.png",
+      "icons": [{
+        "src": "/media/image/portable/icon_128px.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      }, {
+        "src": "/media/image/portable/icon_152px.png",
+        "type": "image/png",
+        "sizes": "152x152"
+      }, {
+        "src": "/media/image/portable/icon_144px.png",
+        "type": "image/png",
+        "sizes": "144x144"
+      }, {
+        "src": "/media/image/portable/icon_192px.png",
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "media/iamge/portable/icon_512px.png",
+        "src": "/media/image/portable/icon_256px.png",
+        "type": "image/png",
+        "sizes": "256x256"
+      },
+      {
+        "src": "/media/image/portable/icon_512px.png",
         "type": "image/png",
         "sizes": "512x512"
-      }],
+      }]
 }
