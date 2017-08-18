@@ -1,0 +1,19 @@
+{
+    "start_url": "/?homescreen=1",
+    "scope": "/",
+    "display": "standalone",
+    "name": "Okay",
+    "short_name": "Okay",
+    "background_color": "#2196F3",
+    "theme_color": "#2196F3",
+    "icons": [{
+        "src": "media/iamge/portable/icon_192px.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "media/iamge/portable/icon_512px.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }],
+}

@@ -3,7 +3,8 @@ var cacheFiles = [
     './',
     './index.html',
     './css/style.css',
-    './js/app.js'
+    './js/app.js',
+    './manifest.json'
 ];
 
 self.addEventListener('install', function (e) {
