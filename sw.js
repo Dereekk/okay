@@ -8,6 +8,7 @@ var cacheFiles = [
 ];
 
 self.addEventListener('install', function (e) {
+    "use strict";
     console.log("[ServiceWorker] Installed");
     
     e.waitUntil(
@@ -21,6 +22,7 @@ self.addEventListener('install', function (e) {
 });
 
 self.addEventListener('activate', function (e) {
+    "use strict";
     console.log("[ServiceWorker] Activated");
     
     e.waitUntil(
@@ -35,11 +37,13 @@ self.addEventListener('activate', function (e) {
                     return caches.delete(thisCacheName);
                 }
             }));
-        })
+        }
+            )
     );
 });
 
 self.addEventListener('fetch', function (e) {
+    "use strict";
     console.log("[ServiceWorker] Fetched", e.request.url);
     
     e.respondWith(
@@ -79,9 +83,10 @@ self.addEventListener('fetch', function (e) {
 });
 
 self.addEventListener('activate', function (e) {
-    console.log("[ServiceWorker] Activated");
+    "use strict";
+    console.log("[ServiceWorker] Activated with registraion");
     
     e.waitUntil(
         self.registration.navigationPreload.enable()
-    )
+    );
 });
