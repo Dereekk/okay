@@ -82,6 +82,6 @@ self.addEventListener('activate', function (e) {
     console.log("[ServiceWorker] Activated");
     
     e.waitUntil(
-        self.registration.navigationPreload.enable();
+        self.registration.navigationPreload.enable()
     )
 });
