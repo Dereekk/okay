@@ -84,7 +84,7 @@ self.addEventListener('fetch', function (e) {
 
 self.addEventListener('activate', function (e) {
     "use strict";
-    console.log("[ServiceWorker] Activated with registraion");
+    console.log("[[ServiceWorker]] Activated with registraion");
     
     e.waitUntil(
         self.registration.navigationPreload.enable()
