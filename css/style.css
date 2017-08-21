@@ -27,7 +27,7 @@
     animation: Square-text 5s linear 0s infinite alternate;
     resize: both;
     overflow: auto;
-    min-width: 50px; /*suggest a min-width & min-height*/
+    min-width: 50px; 
     min-height: 50px;
 }
 

@@ -24,18 +24,19 @@ self.addEventListener('activate', function (e) {
     console.log("[ServiceWorker] Activated");
     
     e.waitUntil(
+        self.registration.navigationPreload.enable()
         
         caches.keys().then(function (cacheNames) {
             return Promise.all(cacheNames.map(function (thisCacheName) {
                 
                 
-                if (thisCacheName !== cacheName) {
+            if (thisCacheName !== cacheName) {
                     
-                    console.log("[ServiceWorker] Removing Cached Files From", thisCacheName);
-                    return caches.delete(thisCacheName);
-                }
-            }));
-        })
+                console.log("[ServiceWorker] Removing Cached Files From", thisCacheName);
+                return caches.delete(thisCacheName);
+            }
+        }));
+    });
     );
 });
 
@@ -43,8 +44,9 @@ self.addEventListener('fetch', function (e) {
     console.log("[ServiceWorker] Fetched", e.request.url);
     
     e.respondWith(
-    
+        
         caches.match(e.request).then(function (respond) {
+
             if (respond) {
                 console.log("[ServiceWorker] Found in cache", e.request.url);
                 return respond;
