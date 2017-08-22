@@ -7,7 +7,7 @@
     50% {background-color: green}
     100% {background-color: blue}
 }
-#Main-header {
+/*#Main-header {
     position: fixed;
     top: 0;
     right: 0;
@@ -17,59 +17,49 @@
     z-index: -100;
     /*animation: Square 5s linear 2s infinite alternate;*/
 }
-
-#text {
-    position:relative;
-    height: 50%;
-    width: 50%;
-    margin: auto;
-    top: 25%;
-    animation: Square-text 5s linear 0s infinite alternate;
-    resize: both;
-    overflow: auto;
-    min-width: 50px; 
-    min-height: 50px;
-}
-
+*/
 #nav-top {
     position: fixed;
     top: 0;
     height: 5%;
     width: 100%;
     background-color: aquamarine;
-    z-index: 5;
-    margin: auto;
     left: 0;
     
 }
-#Home {
-    list-style: none;
-}
-#nav {
-    position: absolute;
-    top: 25%;
-    text-decoration: none;
-    text-decoration-color: wheat;
-    color: black;
-    outline: 2px solid #2B2B2B;
-    outline-offset: 3px;
-}
-#nav:hover {
-    color: white;
-    background: black;
-    margin: auto;
-    
-}
-.fullscreen-bg__video {
-    position: absolute;
-    height: 100%;
+#nav-list {
+    position: relative;
+    min-height: 5%;
+    max-height: 10%;
     width: 100%;
-    top: 0;
-    left: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    width: 25%;
+    float: left;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    text-overflow: inherit;
+    
+}
+li a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin: auto;
+    font-size: 2rem;
+    font-size-adjust: auto;
 }
 
 .targetImage {
-    position:absolute;
+    position: relative;
     height: auto;
     width: 100%;
     top: 5%;
