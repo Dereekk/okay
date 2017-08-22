@@ -1,3 +1,4 @@
+
 self.addEventListener('fetch', event => {
     const respondPromise = [
         caches.match('/shell-start.inc'),
@@ -17,3 +18,6 @@ self.addEventListener('fetch', event => {
         );
     }));
 });
+https://api.nasa.gov/planetary/earth/imagery?api_key=fWfSMcDzyHfMuH3BW6jiIUBYaj3hKRyKBRTBqgEQ
+
+https://api.nasa.gov/images/earth.png

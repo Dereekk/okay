@@ -7,6 +7,8 @@
     50% {background-color: green}
     100% {background-color: blue}
 }
+* {max-width: 100%;}
+
 /*#Main-header {
     position: fixed;
     top: 0;
@@ -56,7 +58,10 @@ li a {
     margin: auto;
     font-size: 2rem;
     font-size-adjust: auto;
+    width: 100%
 }
+a:hover { background: white; color: #333;}
+li:hover {background: white; color: #333;}
 
 .targetImage {
     position: relative;

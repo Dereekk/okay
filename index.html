@@ -6,16 +6,31 @@
         <link rel="manifest" href="manifest.json">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="icon" sizes="192x192" href="media/image/portable/icon_192px.png">
-        <link rel="prefetch">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </head>
     <body>
-            <ul id="nav-list" role="navigation", aria-label="Primary">
+        <nav id="nav-top" >
+            <ul id="nav-list">
                 <li><a href="">Home</a></li>
                 <li><a href="">News</a></li>
                 <li><a href="">Contact</a></li>
                 <li><a href="">About</a></li>
             </ul>
+        </nav>
         <script src="js/app.js" async></script>
-        <p><img src="" alt="Image of Earth from Nasa" class="targetImage"></p>
+        <b>API URL:</b>
+        <pre id="reqObject"></pre>
+        
+        
+        <img id="apod_img_id" width="250px"/>
+        
+        <iframe id="apod_vid_id" type="text/html" width="640" height="385" frameborder="0"></iframe>
+        <p id="copyright"></p>
+        
+        <h3 id="apod_title"></h3>
+        <p id="apod_explaination"></p>
+        <br/>
+        <b>Return Object:</b>
+        <pre id="returnObject"></pre>
     </body>
 </html>
