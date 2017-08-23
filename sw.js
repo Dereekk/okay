@@ -1,40 +1,55 @@
+var staticCacheName = 'okay-static-v1';
+
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('wittr-static-v1').then(function(cache){
+    caches.open(staticCacheName).then(function(cache){
         return cache.addAll([
             './',
             './index.html',
             './css/style.css',
             './js/app.js',
             './manifest.json',
-            './sw.js'
+            './sw.js',
+            'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
         ]);
     })
   );
 });
-self.addEventListener('activate', function(event) {
-    
-});
 
-self.addEventListener('fetch', event => {
-    const url = new URL(event.request.url);
+self.addEventListener('fetch', function(event) {
+    var requestUrl = new URL(event.request.url);
     
-    if (url.origin == location.origin && url.pathname == '/') {
-        event.respondWith(caches.match('/index.html'));
-        return;
+    if (requestUrl.origin === location.origin) {
+        if (requestUrl.pathname === '/') {
+            event.respondWith(caches.match('/skeleton'));
+            return
+        }
     }
     
     event.respondWith(
-        caches.match(event.request)
-            .then(response => response || fetch(event.request))
-    );
-})
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
 
-self.addEventListener('activate', function (e) {
-    "use strict";
-    console.log("[[ServiceWorker]] Activated with registraion");
-    
-    e.waitUntil(
-        self.registration.navigationPreload.enable()
-    );
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('okay-') &&
+                 cacheName != staticCacheName;
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+});
+
+self.addEventListener('message', function(event) {
+    if(event.data.action == 'skipWaiting') {
+        self.skipWaiting();
+    }
 });
