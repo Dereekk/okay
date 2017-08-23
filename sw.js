@@ -1,12 +1,3 @@
-var cacheName = 'v1';
-var cacheFiles = [
-    './',
-    './index.html',
-    './css/style.css',
-    './js/app.js',
-    './manifest.json'
-];
-
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open('v3')
@@ -20,25 +11,8 @@ self.addEventListener('install', event => {
     );
 });
 
-self.addEventListener('activate', function (e) {
-    "use strict";
-    console.log("[ServiceWorker] Activated");
+self.addEventListener('activate', function(event) {
     
-    e.waitUntil(
-        
-        caches.keys().then(function (cacheNames) {
-            return Promise.all(cacheNames.map(function (thisCacheName) {
-                
-                
-                if (thisCacheName !== cacheName) {
-                    
-                    console.log("[ServiceWorker] Removing Cached Files From", thisCacheName);
-                    return caches.delete(thisCacheName);
-                }
-            }));
-        }
-            )
-    );
 });
 
 self.addEventListener('fetch', event => {
