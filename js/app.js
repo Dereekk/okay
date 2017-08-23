@@ -1,4 +1,4 @@
-if ('serviceWorker' in navigator) {
+if (navigator.serviceWorker) {
     
     navigator.serviceWorker.register('./sw.js', {scope: './'}).then(function (registration) {
         "use strict";

@@ -1,16 +1,16 @@
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open('v3')
-            .then(cache => cache.addAll([
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open('wittr-static-v1').then(function(cache){
+        return cache.addAll([
             './',
             './index.html',
             './css/style.css',
             './js/app.js',
             './manifest.json'
-        ]))
-    );
+        ]);
+    })
+  );
 });
-
 self.addEventListener('activate', function(event) {
     
 });
