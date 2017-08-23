@@ -7,8 +7,6 @@
     50% {background-color: green}
     100% {background-color: blue}
 }
-* {max-width: 100%;}
-
 /*#Main-header {
     position: fixed;
     top: 0;
@@ -17,18 +15,9 @@
     left: 0;
     overflow: hidden;
     z-index: -100;
-    /*animation: Square 5s linear 2s infinite alternate;*/
+    /*animation: Square 5s linear 2s infinite alternate;
 }
 */
-#nav-top {
-    position: fixed;
-    top: 0;
-    height: 5%;
-    width: 100%;
-    background-color: aquamarine;
-    left: 0;
-    
-}
 #nav-list {
     position: relative;
     min-height: 5%;
@@ -69,4 +58,18 @@ li:hover {background: white; color: #333;}
     width: 100%;
     top: 5%;
     left: 0;
+}
+
+#content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#cool {
+    position: relative;
+    top: 0;
+    height: auto;
+    width: 100%;
+    
 }

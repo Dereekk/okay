@@ -7,17 +7,16 @@ var cacheFiles = [
     './manifest.json'
 ];
 
-self.addEventListener('install', function (e) {
-    "use strict";
-    console.log("[ServiceWorker] Installed");
-    
-    e.waitUntil(
-    
-        caches.open(cacheName).then(function (cache) {
-            
-            console.log("[ServiceWorker] Caching CacheFiles");
-            return cache.addAll(cacheFiles);
-        })
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open('v3')
+            .then(cache => cache.addAll([
+            './',
+            './index.html',
+            './css/style.css',
+            './js/app.js',
+            './manifest.json'
+        ]))
     );
 });
 
@@ -42,45 +41,19 @@ self.addEventListener('activate', function (e) {
     );
 });
 
-self.addEventListener('fetch', function (e) {
-    "use strict";
-    console.log("[ServiceWorker] Fetched", e.request.url);
+self.addEventListener('fetch', event => {
+    const url = new URL(event.request.url);
     
-    e.respondWith(
-        
-        caches.match(e.request).then(function (respond) {
-
-            if (respond) {
-                console.log("[ServiceWorker] Found in cache", e.request.url);
-                return respond;
-            }
-            
-            var requestClone = e.request.clone();
-            
-            fetch(requestClone)
-                .then(function (response) {
-                    if (!response) {
-				        console.log("[ServiceWorker] No response from fetch ");
-				        return response;
-				    }
-
-				    var responseClone = response.clone();
-
-				    caches.open(cacheName).then(function (cache) {
-
-							
-				        cache.put(e.request, responseClone);
-                        console.log('[ServiceWorker] New Data Cached', e.request.url);
-                        return response;
-			
-				    });
-				})
-					.catch(function (err) {
-				    console.log('[ServiceWorker] Error Fetching & Caching New Data', err);
-                });
-        })
-	);
-});
+    if (url.origin == location.origin && url.pathname == '/') {
+        event.respondWith(caches.match('/index.html'));
+        return;
+    }
+    
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => response || fetch(event.request))
+    );
+})
 
 self.addEventListener('activate', function (e) {
     "use strict";
