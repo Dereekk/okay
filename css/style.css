@@ -7,6 +7,11 @@
     50% {background-color: green}
     100% {background-color: blue}
 }
+@keyframes Boat {
+    0% {transform: rotate(0deg); left: 25%}
+    50% {transform: rotate(5deg); left: 23%}
+    100% {transform: rotate(-5deg); left: 21%}
+}
 /*#Main-header {
     position: fixed;
     top: 0;
@@ -18,6 +23,31 @@
     /*animation: Square 5s linear 2s infinite alternate;
 }
 */
+body:before {
+    content: "";
+          position: fixed;
+          top: -10px;
+          left: 0;
+          width: 100%;
+          height: 10px;
+
+          -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.71);
+              -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.71);
+                         box-shadow: 0px 0px 10px rgba(0,0,0,.71);
+
+          z-index: 100;
+}
+
+#boat {
+    position: absolute;
+    top: 10%;
+    height: auto;
+    width: 50%;
+    left: 25%;
+    animation: Boat 10s linear 2s infinite alternate;
+
+}
+
 #nav-list {
     position: relative;
     min-height: 5%;

@@ -4,12 +4,12 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(staticCacheName).then(function(cache){
         return cache.addAll([
-            './',
-            './index.html',
-            './css/style.css',
-            './js/app.js',
-            './manifest.json',
-            './sw.js',
+            '/',
+            'index.html',
+            'css/style.css',
+            'js/app.js',
+            'manifest.json',
+            'sw.js',
             'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
         ]);
     })
