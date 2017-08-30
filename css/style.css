@@ -100,6 +100,6 @@ li:hover {background: white; color: #333;}
     position: relative;
     top: 0;
     height: auto;
-    width: 100%;
+    width: calc(100% - 5vw);
     
 }
