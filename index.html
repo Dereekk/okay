@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
     <head>
         <title>Okay</title>
@@ -7,20 +8,34 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="icon" sizes="192x192" href="media/image/portable/icon_192px.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     </head>
     <body>
-            <ul id="nav-list" role="navigation" aria-label="Top Navigation bar">
-                <li><a href="" role="navigation" aria-labelledby="Home">Home</a></li>
-                <li><a href="" role="navigation" aria-labelledby="News">News</a></li>
-                <li><a href="" role="navigation" aria-labelledby="Contact">Contact</a></li>
-                <li><a href="" role="navigation" aria-labelledby="About">About</a></li>
-            </ul>
-        <img id="cool" alt="idk" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=">
+        <div class="header">
+            <button class="js-menu-show header__menu-toggle material-icons">menu</button>
+        </div>
+        <aside class="js-side-nav side-nav">
+            <nav class="js-side-nav-container side-nav__container">
+                    <button class="js-menu-hide side-nav__hide material-icons">close</button>
+                <header class="side-nav__header">
+                    Side Nav
+                </header>
+                <ul class="side-nav__content">
+                    <li>One</li>
+                    <li>Two</li>
+                    <li>Three</li>
+                    <li>Four</li>
+                                         
+                </ul>
+            </nav>
+        </aside>
+        <!--<img id="cool" alt="idk" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=">
         <img src="media\image\YTT-Pirate_Ship_Sprite.png" alt="boat" id="boat">
-        <!--<audio src="audio\media-762f0938.mp3" autoplay></audio>-->
-        <script src="js/app.js" async></script>
+        <audio src="audio\media-762f0938.mp3" autoplay></audio>
+        
         <b>API URL:</b>
-        <pre id="reqObject"></pre>
+        <pre id="reqObject"></pre>-->
         
         
         <img alt="Astronomy Picture of the Day" id="apod_img_id" width="250px"/>
@@ -31,6 +46,8 @@
         <h3 id="apod_title"></h3>
         <p id="apod_explaination"></p>
 
-        
+        <script src='js/detabinator.js'></script>
+        <script src="js/side-Nav.js"></script>
+        <script src="js/app.js" async></script>
     </body>
 </html>
