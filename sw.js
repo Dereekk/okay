@@ -1,4 +1,4 @@
-var staticCacheName = 'okay-static-v1';
+var staticCacheName = 'okay-static-v2';
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
@@ -8,6 +8,9 @@ self.addEventListener('install', function (event) {
         'index.html',
         'css/style.css',
         'js/app.js',
+        'js/detabinator.js',
+        'js/side-Nav.js',
+        'js/nasa.js',
         'manifest.json',
         'sw.js',
         'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
