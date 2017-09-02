@@ -1,7 +1,7 @@
 var staticCacheName = 'okay-static-v1';
 
 addEventListener('install', event =>  {
-  event.waitUntil(
+  event.waitUntil( async function () {
     caches.open(staticCacheName).then(function (cache) {
       return cache.addAll([
         '/',
@@ -16,7 +16,7 @@ addEventListener('install', event =>  {
         'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
       ]);
     })
-  );
+  });
 });
 
 addEventListener('fetch', event =>  {
@@ -37,7 +37,7 @@ addEventListener('fetch', event =>  {
 });
 
 addEventListener('activate', event => {
-  event.waitUntil(
+  event.waitUntil( async function() {
     caches.keys().then(function (cacheNames) {
       return Promise.all(
         cacheNames.filter(function (cacheName) {
@@ -48,7 +48,7 @@ addEventListener('activate', event => {
         })
       );
     })
-  );
+  });
 });
 
 addEventListener('message', event => {
