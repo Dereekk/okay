@@ -29,11 +29,11 @@ addEventListener('fetch', event =>  {
     }
   }
 
-  event.respondWith( async function () {
+  event.respondWith(
     caches.match(event.request).then(function (response) {
       return response || fetch(event.request);
     })
-  });
+  );
 });
 
 addEventListener('activate', event => {
