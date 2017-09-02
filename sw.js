@@ -8,9 +8,9 @@ self.addEventListener('install', function (event) {
         './index.html',
         './css/style.css',
         './js/app.js',
-        './js/detabinator.js',
-        './js/side-Nav.js',
-        './js/nasa.js',
+        '/js/detabinator.js',
+        '/js/side-Nav.js',
+        '/js/nasa.js',
         './manifest.json',
         './sw.js',
         'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
