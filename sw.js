@@ -1,7 +1,7 @@
 var staticCacheName = 'okay-static-v1';
 
-self.addEventListener('install', function (event) {
-  event.waitUntil(
+addEventListener('install', event =>  {
+  event.waitUntil( async function (){
     caches.open(staticCacheName).then(function (cache) {
       return cache.addAll([
         '/',
@@ -17,9 +17,10 @@ self.addEventListener('install', function (event) {
       ]);
     })
   );
+  }
 });
 
-self.addEventListener('fetch', function (event) {
+addEventListener('fetch', event =>  {
   var requestUrl = new URL(event.request.url);
 
   if (requestUrl.origin === location.origin) {
@@ -29,15 +30,15 @@ self.addEventListener('fetch', function (event) {
     }
   }
 
-  event.respondWith(
+  event.respondWith( async function () {
     caches.match(event.request).then(function (response) {
       return response || fetch(event.request);
     })
-  );
+  )};
 });
 
-self.addEventListener('activate', function (event) {
-  event.waitUntil(
+addEventListener('activate', event => {
+  event.waitUntil(async function () {
     caches.keys().then(function (cacheNames) {
       return Promise.all(
         cacheNames.filter(function (cacheName) {
@@ -48,10 +49,10 @@ self.addEventListener('activate', function (event) {
         })
       );
     })
-  );
+  )};
 });
 
-self.addEventListener('message', function (event) {
+addEventListener('message', event => {
   if (event.data.action == 'skipWaiting') {
     self.skipWaiting();
   }
