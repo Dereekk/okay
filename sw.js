@@ -16,8 +16,7 @@ addEventListener('install', event =>  {
         'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
       ]);
     })
-  );
-  }
+  });
 });
 
 addEventListener('fetch', event =>  {
@@ -34,7 +33,7 @@ addEventListener('fetch', event =>  {
     caches.match(event.request).then(function (response) {
       return response || fetch(event.request);
     })
-  )};
+  });
 });
 
 addEventListener('activate', event => {
@@ -49,7 +48,7 @@ addEventListener('activate', event => {
         })
       );
     })
-  )};
+  });
 });
 
 addEventListener('message', event => {
