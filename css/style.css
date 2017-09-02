@@ -88,8 +88,8 @@ body:before {
 }
 */
 
-#apod_explaination {
-    width: 50%;
+.NASA-Element {
+    width: 100%;
 }
 
 .side-nav {
