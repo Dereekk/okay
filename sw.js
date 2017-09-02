@@ -1,3 +1,4 @@
+'use strict';
 var staticCacheName = 'okay-static-v1';
 
 addEventListener('install', event =>  {
@@ -29,11 +30,12 @@ addEventListener('fetch', event =>  {
     }
   }
 
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
+  
+  event.respondWith( async function() {
+        caches.match(event.request).then(function (response) {
       return response || fetch(event.request);
     })
-  );
+  });
 });
 
 addEventListener('activate', event => {
