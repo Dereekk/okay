@@ -29,15 +29,15 @@ addEventListener('fetch', event =>  {
     }
   }
 
-  event.respondWith( async function() {
+  event.respondWith(
     caches.match(event.request).then(function (response) {
       return response || fetch(event.request);
     })
-  });
+  );
 });
 
 addEventListener('activate', event => {
-  event.waitUntil(
+  event.waitUntil( async function() {
     caches.keys().then(function (cacheNames) {
       return Promise.all(
         cacheNames.filter(function (cacheName) {
@@ -48,7 +48,7 @@ addEventListener('activate', event => {
         })
       );
     })
-  );
+  });
 });
 
 addEventListener('message', event => {
