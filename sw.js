@@ -1,8 +1,34 @@
 'use strict';
+
 var staticCacheName = 'okay-static-v1';
 
+addEventListener('activate', event => {
+  event.waitUntil( async function() {
+    caches.keys().then(function (cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function (cacheName) {
+          return cacheName.startsWith('okay-') &&
+            cacheName != staticCacheName;
+        }).map(function (cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  }());
+});
+
+addEventListener('activate', event => {
+  event.waitUntil(async function() {
+    // Feature-detect
+    if (self.registration.navigationPreload) {
+      // Enable navigation preloads!
+      await self.registration.navigationPreload.enable();
+    }
+  }());
+});
+
 addEventListener('install', event =>  {
-  event.waitUntil( async function () {
+  event.waitUntil(async function() {
     caches.open(staticCacheName).then(function (cache) {
       return cache.addAll([
         '/',
@@ -17,41 +43,25 @@ addEventListener('install', event =>  {
         'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
       ]);
     })
-  });
+  }());
 });
 
-addEventListener('fetch', event =>  {
-  var requestUrl = new URL(event.request.url);
+addEventListener('fetch', event => {
+  event.respondWith(async function() {
+    // Respond from the cache if we can
+    const cachedResponse = await caches.match(event.request);
+    if (cachedResponse) return cachedResponse;
 
-  if (requestUrl.origin === location.origin) {
-    if (requestUrl.pathname === '/') {
-      event.respondWith(caches.match('/skeleton'));
-      return
-    }
-  }
+    // Else, use the preloaded response, if it's there
+    const response = await event.preloadResponse;
+    if (response) return response;
 
-  
-  event.respondWith( async function() {
-        caches.match(event.request).then(function (response) {
-      return response || fetch(event.request);
-    })
-  });
+    // Else try the network.
+    return fetch(event.request);
+  }());
 });
 
-addEventListener('activate', event => {
-  event.waitUntil( async function() {
-    caches.keys().then(function (cacheNames) {
-      return Promise.all(
-        cacheNames.filter(function (cacheName) {
-          return cacheName.startsWith('okay-') &&
-            cacheName != staticCacheName;
-        }).map(function (cacheName) {
-          return caches.delete(cacheName);
-        })
-      );
-    })
-  });
-});
+
 
 addEventListener('message', event => {
   if (event.data.action == 'skipWaiting') {
