@@ -1,6 +1,5 @@
-'use strict';
-
 var staticCacheName = 'okay-static-v1';
+var urlsToPrefetch = 'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
 
 addEventListener('activate', event => {
   event.waitUntil( async function() {
@@ -19,10 +18,12 @@ addEventListener('activate', event => {
 
 addEventListener('activate', event => {
   event.waitUntil(async function() {
+    console.log(event);
     // Feature-detect
     if (self.registration.navigationPreload) {
       // Enable navigation preloads!
       await self.registration.navigationPreload.enable();
+      console.log('NavigatorPreload Registered');
     }
   }());
 });
@@ -40,24 +41,46 @@ addEventListener('install', event =>  {
         'js/nasa.js',
         'manifest.json',
         'sw.js',
-        'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
-      ]);
+      ]),
+      cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
+        return new Request(urlToPrefetch, { mode: 'no-cors' });
+      })).then(function() {
+        console.log('All resources have been fetched and cached.');
+      });
     })
+    console.log(event);
   }());
 });
 
 addEventListener('fetch', event => {
-  event.respondWith(async function() {
-    // Respond from the cache if we can
-    const cachedResponse = await caches.match(event.request);
-    if (cachedResponse) return cachedResponse;
+  event.respondWith(async function(){
+    caches.match(event.preloadResponse)
+      .then(function(response) {
 
-    // Else, use the preloaded response, if it's there
-    const response = await event.preloadResponse;
-    if (response) return response;
+        if (response) {
+          return response;
+        }
 
-    // Else try the network.
-    return fetch(event.request);
+        var fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest).then(
+          function(response) {
+
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            var responseToCache = response.clone();
+
+            caches.open(staticCacheName)
+              .then(function(cache) {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
+      })
   }());
 });
 
