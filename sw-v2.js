@@ -1,10 +1,9 @@
-// Set a name for the current cache
-var cacheName = 'v1'; 
+var cacheName = 'v1';
 
-// Default files to always cache
 var cacheFiles = [
 	'./',
 	'./index.html',
+	'./sw-v2.js',
 	'./js/app.js',
   './js/nasa.js',
   './js/side-Nav.js',
@@ -14,7 +13,7 @@ var cacheFiles = [
 ]
 
 
-self.addEventListener('install', event => {
+addEventListener('install', event => {
     console.log('[ServiceWorker] Installed');
 
     event.waitUntil(
@@ -27,11 +26,13 @@ self.addEventListener('install', event => {
 	);
 });
 
-
-self.addEventListener('activate', event => {
+addEventListener('activate', event => {
     console.log('[ServiceWorker] Activated');
 
-    event.waitUntil(
+    event.waitUntil(async () => {
+		if (self.registration.navigationPreload) {
+			await self.registration.navigationPreload.enable();
+		}
 
 		caches.keys().then(function(cacheNames) {
 			return Promise.all(cacheNames.map(function(thisCacheName) {
@@ -43,54 +44,32 @@ self.addEventListener('activate', event => {
 				}
 			}));
 		})
-	);
+	});
 
 });
-
-
 self.addEventListener('fetch', event => {
 	console.log('[ServiceWorker] Fetch', event.request.url);
-
 	event.respondWith(
-
-		caches.match(event.request)
-
-
-			.then(function(response) {
-
-				if ( response ) {
-					console.log("[ServiceWorker] Found in Cache", event.request.url, response);
-
+		caches.match(event.request).then(function(response) {
+			if ( response ) {
+				console.log("[ServiceWorker] Found in Cache", event.request.url, response);
+				return response;
+			}
+			var requestClone = event.request.clone();
+			fetch(requestClone).then(function(response) {
+				if ( !response ) {
+					console.log("[ServiceWorker] No response from fetch ")
 					return response;
 				}
-
-
-				var requestClone = event.request.clone();
-				fetch(requestClone)
-					.then(function(response) {
-
-						if ( !response ) {
-							console.log("[ServiceWorker] No response from fetch ")
-							return response;
-						}
-
-						var responseClone = response.clone();
-
-						caches.open(cacheName).then(function(cache) {
-
-							cache.put(event.request, responseClone);
-							console.log('[ServiceWorker] New Data Cached', event.request.url);
-
-							return response;
-			
-				        });
-
-					})
-					.catch(function(err) {
-						console.log('[ServiceWorker] Error Fetching & Caching New Data', err);
-					});
-
-
-			})
+				var responseClone = response.clone();
+				caches.open(cacheName).then(function(cache) {
+					cache.put(event.request, responseClone);
+					console.log('[ServiceWorker] New Data Cached', event.request.url);
+					return response;
+				});
+			}).catch(function(err) {
+				console.log('[ServiceWorker] Error Fetching & Caching New Data', err);
+				});
+		})
 	);
 });
