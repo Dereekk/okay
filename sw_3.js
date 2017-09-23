@@ -15,5 +15,13 @@
         },
         origin: /\.nasa\.gov$/
       });
+      toolbox.router.get('/', global.toolbox.cacheFirst, {
+        cache: {
+          name: 'index',
+          maxEntries: 10,
+          maxAgeSeconds: 86400
+        },
+        origin: /\$/
+      });
     toolbox.precache([ 'index.html', 'css/style.css', 'js/app.js', 'js/detabinator.js', 'js/side-Nav.js', 'js/nasa.js' ]);
   })(self);
