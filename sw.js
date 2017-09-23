@@ -40,7 +40,7 @@ addEventListener('install', event =>  {
         'js/side-Nav.js',
         'js/nasa.js',
         'manifest.json',
-        'sw.js',
+        'sw.js'
       ]),
       cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
         return new Request(urlToPrefetch, { mode: 'no-cors' });

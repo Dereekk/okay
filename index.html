@@ -11,7 +11,6 @@
       rel="stylesheet">
     </head>
     <body>
-        <script src="js/index.js"></script>
         <div class="header">
             <button class="js-menu-show header__menu-toggle material-icons">menu</button>
         </div>
@@ -46,10 +45,9 @@
         
         <h3 class="apod_title NASA-Element"></h3>
         <p class="apod_explaination NASA-Element"></p>
-
-        <script src='js/detabinator.js' async></script>
+        <script src="/sw-toolbox/companion.js" data-service-worker="/sw_3.js"></script>
+        <script src='js/detabinator.js'></script>
         <script src="js/side-Nav.js" async></script>
         <script src="js/nasa.js" async></script>
-        
     </body>
 </html>
