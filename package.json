@@ -1,0 +1,23 @@
+{
+  "name": "okay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sw-2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dereekk/okay.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dereekk/okay/issues"
+  },
+  "homepage": "https://github.com/Dereekk/okay#readme",
+  "dependencies": {
+    "workbox-cli": "^2.0.2-rc1",
+    "workbox-sw": "file:node_modules/workbox-sw"
+  }
+}
