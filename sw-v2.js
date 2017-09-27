@@ -9,7 +9,8 @@ var cacheFiles = [
   './js/side-Nav.js',
   './js/detabinator.js',
   './css/style.css',
-	'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic'
+	'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic',
+	'https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn'
 ]
 
 
